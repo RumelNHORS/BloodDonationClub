@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Add Donor{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if request.user.is_authenticated %}
+    <div class="container shadow p-4 md-5 bg-body rounded">    
+    <h4>Add Donor Here</h4>
+    <form method="POST" class="form-group">
+		{% csrf_token %}
+		
+		{{ form|crispy }}
+	    <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message.tags }}</strong> Donor added successfully.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message|safe }}
+        </div>
+        {% endfor %}
+    {% endif %} 
+{% else %}
+<div class="container"><br>
+    <h2>: (</h2>
+    <h4>Sorry You Are Not Allow To View This Page</h4><br>
+    <h5>Please Click <a href="/login">Login</a> to View This page</h5>
+</div>
+{% endif %}
+</div>
+{% endblock content %}
+
+

@@ -1,0 +1,39 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Filter Donor{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if searched %}
+<div class="container card-body">
+    <h4 class="card-title"><strong>You Search Blood-Group For : {{ searched }}</strong></h4><hr>
+    <p class="card-text">
+    {% for result in search_result %}
+    <ul>
+        <li><Strong>Donao Name : </strong>{{ result.name }}</li>
+        <li><strong>Age : </strong>{{ result.age }}</li>
+        <li><strong>Blood Group : </strong>{{ result.blood_group }}</li> 
+        <li><strong>Phone : </strong>{{ result.phone }}</li>
+        <li><strong>Email : </strong>{{ result.email }}</li>
+        <li><strong>Last Donation Date : </strong>{{ result.last_donation }}</li>
+        <li><strong>Address : </strong>{{ result.address }}</li>
+    </ul><hr>
+    {% endfor %}
+
+    {% for by_address in search_result_address %}
+    <ul>
+        <li><Strong>Donao Name : </strong>{{ by_address.name }}</li>
+        <li><strong>Age : </strong>{{ by_address.age }}</li>
+        <li><strong>Blood Group : </strong>{{ by_address.blood_group }}</li> 
+        <li><strong>Phone : </strong>{{ by_address.phone }}</li>
+        <li><strong>Email : </strong>{{ by_address.email }}</li>
+        <li><strong>Last Donation Date : </strong>{{ by_address.last_donation }}</li>
+        <li><strong>Address : </strong>{{ by_address.address }}</li>
+    </ul><hr>
+    {% endfor %}
+
+{% else %}
+    <h2>Hey ! You forgot to search a Donor</2>
+{% endif %}
+</div>
+{% endblock content %}
+
+

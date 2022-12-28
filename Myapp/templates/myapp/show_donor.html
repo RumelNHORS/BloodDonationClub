@@ -1,0 +1,53 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container col-md-8"><br>
+    <div class="card">
+      <div class="card-header">
+        <h3><b>Donor List</b></h3>
+      </div>
+      {% for donorlist in donor_list %}
+        <div class="card-body">
+          <h5 class="card-title"><strong>Donor Name : {{ donorlist }}</strong></h5>
+          <p class="card-text">
+          <ul>
+            <li><Strong>Donao Name : </strong>{{ donorlist.name }}</li>
+            <li><strong>Age : </strong>{{ donorlist.age }}</li>
+            <li><strong>Blood Group : </strong>{{ donorlist.blood_group }}</li> 
+            <li><strong>Phone : </strong>{{ donorlist.phone }}</li>
+            <li><strong>Email : </strong>{{ donorlist.email }}</li>
+            <li><strong>Last Donation Date : </strong>{{ donorlist.last_donation }}</li>
+            <li><strong>Address : </strong>{{ donorlist.address }}</li>
+          </ul>
+      </div>
+    {% endfor %}
+</div><br>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+      {% else %}
+      <li class="page-item disable"></li>
+      {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="page-item active">
+              <span class="page-link">
+                {{ i }}
+                <span class="sr-only"></span>
+              </span>
+            </li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+      {% endif %}
+</ul>
+</nav>
+{{ nums }}
+<br><br>
+
+{% endblock content %}
