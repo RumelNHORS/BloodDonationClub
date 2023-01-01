@@ -11,4 +11,7 @@ urlpatterns = [
     #path('filter/', views.FilterDonorView.as_view(), name='donor-filter'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('search_donor/', views.SearchDonor, name='search-donor'),
+    path('update/<int:id>/', views.DonorUpdate.as_view(), name='donor-update'),
+    path('<int:id>/', views.DonorDelete.as_view(), name="delete-donor"),
+
 ]

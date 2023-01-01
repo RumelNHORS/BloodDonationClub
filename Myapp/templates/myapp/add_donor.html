@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% if request.user.is_authenticated %}
-    <div class="container shadow p-4 md-5 bg-body rounded">    
+    <div class="container col-md-6"><br>
     <h4>Add Donor Here</h4>
     <form method="POST" class="form-group">
 		{% csrf_token %}

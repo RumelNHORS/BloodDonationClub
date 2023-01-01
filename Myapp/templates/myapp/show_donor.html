@@ -10,6 +10,7 @@
           <h5 class="card-title"><strong>Donor Name : {{ donorlist }}</strong></h5>
           <p class="card-text">
           <ul>
+            <li><Strong>Donao Author : </strong>{{ donorlist.author }}</li>
             <li><Strong>Donao Name : </strong>{{ donorlist.name }}</li>
             <li><strong>Age : </strong>{{ donorlist.age }}</li>
             <li><strong>Blood Group : </strong>{{ donorlist.blood_group }}</li> 
@@ -18,8 +19,17 @@
             <li><strong>Last Donation Date : </strong>{{ donorlist.last_donation }}</li>
             <li><strong>Address : </strong>{{ donorlist.address }}</li>
           </ul>
-      </div>
-    {% endfor %}
+          {% if request.user.is_authenticated %}
+            {% if user.id == donorlist.author.id %}
+              <a href="{% url 'donor-update' donorlist.id %}" class="btn btn-info btn-sm">Edit</a>                   
+                <form action="{% url 'delete-donor' donorlist.id %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                </form>
+            {% endif %}
+          {% endif %}
+      </div><hr>
+      {% endfor %}
 </div><br>
 
   <nav aria-label="Page navigation example">

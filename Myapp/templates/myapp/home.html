@@ -15,42 +15,32 @@
           <a class="nav-link" href="{% url 'add-donor' %}">Add Donors</a>
         </li>
         {% endif %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" method="POST", action="{% url 'search-donor' %}">
         {% csrf_token %}
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='searched'>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
       </form>
-      <div class="navbar-nav mr-auto">
+      
+      <div class="navbar-nav mr-auto"></div>
+      
+      <div class="navbar-nav mr-right">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{ user.username }}</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only"></span></a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only"></span></a>
+        </li>
+        {% endif %}
       </div>
-    </div>
-    <div class="navbar-nav mr-auto">
-      {% if request.user.is_authenticated %}
-      <li class="nav-item active">
-        <a class="nav-link" href="#">{{ user.username }}</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only"></span></a>
-      </li>
-      {% else %}
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only"></span></a>
-      </li>
-      {% endif %}
     </div>
   </nav>
 
